@@ -501,12 +501,13 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 32px;
-      font-size: 22px;
-      transition: border-color 0.3s ease;
+      color: var(--cream-dim);
+      transition: border-color 0.3s ease, color 0.3s ease;
     }
 
     .offering-card:hover .offering-icon-ring {
       border-color: rgba(200,149,44,0.45);
+      color: var(--gold-hi);
     }
 
     .offering-title {
@@ -812,9 +813,8 @@
   <nav id="nav" aria-label="Main navigation">
     <a href="#" class="nav-logo" aria-label="Meridiem — home">Meridiem</a>
     <ul class="nav-links">
-      <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li>
-      <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></li>
-      <li><a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a></li>
+      <li><a href="https://instagram.com/drinkmeridiem" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li>
+      <li><a href="https://x.com/drinkmeridiem" target="_blank" rel="noopener" aria-label="X">X</a></li>
     </ul>
   </nav>
 
@@ -914,7 +914,9 @@
       <div class="offerings-grid">
         <article class="offering-card reveal" aria-labelledby="offer-1-title">
           <div class="offering-num">01</div>
-          <div class="offering-icon-ring" aria-hidden="true">☕</div>
+          <div class="offering-icon-ring" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+          </div>
           <h3 class="offering-title" id="offer-1-title">Coffee Shop</h3>
           <p class="offering-desc">
             Artisanal brews from dawn to dusk. Single-origin beans, expert baristas, and a
@@ -924,7 +926,9 @@
 
         <article class="offering-card reveal delay-1" aria-labelledby="offer-2-title">
           <div class="offering-num">02</div>
-          <div class="offering-icon-ring" aria-hidden="true">🍸</div>
+          <div class="offering-icon-ring" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9C7.5 6 7 8 7 10a5 5 0 0 0 5 5Z"/></svg>
+          </div>
           <h3 class="offering-title" id="offer-2-title">The Bar</h3>
           <p class="offering-desc">
             Crafted cocktails from dusk to dawn. Seasonal menus, rare spirits, and an atmosphere
@@ -934,7 +938,9 @@
 
         <article class="offering-card reveal delay-2" aria-labelledby="offer-3-title">
           <div class="offering-num">03</div>
-          <div class="offering-icon-ring" aria-hidden="true">🥫</div>
+          <div class="offering-icon-ring" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4c0-.83 2.24-1.5 5-1.5S17 3.17 17 4v16c0 .83-2.24 1.5-5 1.5S7 20.83 7 20Z"/><path d="M7 10c0 .83 2.24 1.5 5 1.5s5-.67 5-1.5"/><path d="M7 4c0 .83 2.24 1.5 5 1.5S17 4.83 17 4"/></svg>
+          </div>
           <h3 class="offering-title" id="offer-3-title">Canned Drinks</h3>
           <p class="offering-desc">
             Our signature coffee and cocktails in ready-to-enjoy cans. Meridiem, wherever
@@ -985,9 +991,8 @@
         <div class="footer-logo" aria-label="Meridiem">Meridiem</div>
 
         <ul class="footer-links" aria-label="Social links">
-          <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-          <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+          <li><a href="https://instagram.com/drinkmeridiem" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://x.com/drinkmeridiem" target="_blank" rel="noopener noreferrer">X</a></li>
         </ul>
 
         <p class="footer-copy">© 2026 Meridiem. All rights reserved.</p>
