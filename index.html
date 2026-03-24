@@ -1,426 +1,1036 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#1a1410">
-    <meta name="description" content="Meridiem - A new coffee shop & bar experience. Where morning meets night, coffee meets cocktails.">
-    <title>Meridiem — Coming Soon</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d0906" />
+  <meta name="description" content="Meridiem — A coffee shop and bar where morning meets night. Opening 2026." />
+  <title>Meridiem — Coffee Shop &amp; Bar</title>
 
-        html {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-            background: linear-gradient(135deg, #1a1410 0%, #2d1810 50%, #1a1410 100%);
-            color: #f5f1e8;
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            position: relative;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Animated background elements */
-        body::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(210, 180, 140, 0.03) 0%, transparent 50%);
-            animation: rotate 30s linear infinite;
-        }
+    :root {
+      --bg:        #0d0906;
+      --bg-warm:   #170f08;
+      --surface:   #1a120b;
+      --surface-2: #221810;
+      --gold:      #c8952c;
+      --gold-hi:   #e8b84b;
+      --gold-lo:   #7a5a1a;
+      --cream:     #f0e6d4;
+      --cream-dim: #b09a7e;
+      --muted:     #5e4e3c;
+      --rule:      rgba(200,149,44,0.18);
+      --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: clamp(1rem, 5vw, 2rem);
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            animation: fadeIn 1.5s ease-in;
-        }
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* Subtle noise grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      mix-blend-mode: overlay;
+    }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 12vw, 7rem);
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            margin-bottom: clamp(0.5rem, 3vw, 1rem);
-            line-height: 1.1;
-            background: linear-gradient(135deg, #f5f1e8 0%, #d4af7a 50%, #c9a961 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s ease-in-out infinite;
-            word-break: keep-all;
-        }
+    /* ── UTILITY ──────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
 
-        @keyframes shimmer {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
-        }
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
 
-        .tagline {
-            font-size: clamp(1rem, 4vw, 2rem);
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            text-transform: lowercase;
-            color: #c9a961;
-            margin-bottom: clamp(2rem, 5vw, 3rem);
-            opacity: 0.9;
-            line-height: 1.4;
-        }
+    /* ── NAV ──────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      transition: background 0.5s ease, padding 0.4s ease, border-color 0.5s ease;
+      border-bottom: 1px solid transparent;
+    }
 
-        .divider {
-            width: clamp(80px, 20vw, 100px);
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #c9a961, transparent);
-            margin: clamp(1.5rem, 4vw, 2rem) auto;
-            position: relative;
-        }
+    #nav.scrolled {
+      background: rgba(13, 9, 6, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 18px 48px;
+      border-color: var(--rule);
+    }
 
-        .divider::before,
-        .divider::after {
-            content: '◆';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #c9a961;
-            font-size: 0.6rem;
-        }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
 
-        .divider::before { left: -20px; }
-        .divider::after { right: -20px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
 
-        .description {
-            font-size: clamp(0.95rem, 3.5vw, 1.25rem);
-            line-height: 1.8;
-            color: #d4af7a;
-            margin-bottom: clamp(2rem, 5vw, 3rem);
-            font-weight: 300;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
 
-        .offerings {
-            display: flex;
-            justify-content: center;
-            gap: clamp(1rem, 3vw, 2rem);
-            flex-wrap: wrap;
-            margin-bottom: clamp(2rem, 5vw, 3rem);
-            width: 100%;
-        }
+    .nav-links a:hover { color: var(--cream); }
 
-        .offering {
-            flex: 1 1 calc(33.333% - 2rem);
-            min-width: min(200px, 100%);
-            max-width: 250px;
-            padding: clamp(1.25rem, 4vw, 1.5rem);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(201, 169, 97, 0.2);
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            will-change: transform;
-        }
+    /* ── HERO ─────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100dvh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 100% 70% at 20% 70%, rgba(45,24,10,0.7) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 60% at 80% 30%, rgba(10,12,22,0.6) 0%, transparent 55%),
+        var(--bg);
+    }
 
-        .offering:hover {
-            transform: translateY(-5px);
-            border-color: rgba(201, 169, 97, 0.5);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.1);
-        }
+    /* Horizontal grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 79px,
+          rgba(200,149,44,0.035) 79px,
+          rgba(200,149,44,0.035) 80px
+        );
+    }
 
-        .offering-icon {
-            font-size: clamp(2rem, 6vw, 2.5rem);
-            margin-bottom: clamp(0.75rem, 2vw, 1rem);
-            line-height: 1;
-        }
+    /* Giant ghost AM / PM text */
+    .hero-ghost {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4vw;
+      pointer-events: none;
+      user-select: none;
+    }
 
-        .offering-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-            font-weight: 600;
-            color: #f5f1e8;
-            margin-bottom: clamp(0.4rem, 1.5vw, 0.5rem);
-            line-height: 1.3;
-        }
+    .hero-ghost span {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(100px, 22vw, 340px);
+      font-weight: 900;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,149,44,0.055);
+    }
 
-        .offering-text {
-            font-size: clamp(0.85rem, 2.5vw, 0.9rem);
-            color: #d4af7a;
-            opacity: 0.8;
-            line-height: 1.5;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      width: 100%;
+    }
 
-        .coming-soon {
-            font-size: clamp(0.75rem, 2.5vw, 1.1rem);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #f5f1e8;
-            margin-bottom: clamp(1.5rem, 4vw, 2rem);
-            position: relative;
-            display: inline-block;
-            padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 5vw, 2rem);
-            border: 1px solid rgba(201, 169, 97, 0.3);
-            border-radius: 50px;
-            background: rgba(201, 169, 97, 0.05);
-        }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-expo) 0.2s forwards;
+    }
 
-        .notify-form {
-            display: flex;
-            gap: clamp(0.75rem, 2vw, 1rem);
-            max-width: 500px;
-            width: 100%;
-            margin: 0 auto clamp(1.5rem, 4vw, 2rem);
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(68px, 13.5vw, 196px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      background: linear-gradient(140deg, #b07820 0%, #e8c870 30%, #c8952c 58%, #9a7020 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-expo) 0.4s forwards;
+    }
 
-        .notify-input {
-            flex: 1 1 auto;
-            min-width: min(250px, 100%);
-            padding: clamp(0.875rem, 3vw, 1rem) clamp(1.25rem, 4vw, 1.5rem);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(201, 169, 97, 0.3);
-            border-radius: 50px;
-            color: #f5f1e8;
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(0.9rem, 3vw, 1rem);
-            outline: none;
-            transition: all 0.3s ease;
-            -webkit-appearance: none;
-            appearance: none;
-        }
+    .hero-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) 0.6s forwards;
+    }
 
-        .notify-input::placeholder {
-            color: rgba(212, 175, 122, 0.5);
-        }
+    .hero-rule-line {
+      width: 72px;
+      height: 1px;
+      background: var(--gold-lo);
+    }
 
-        .notify-input:focus {
-            border-color: #c9a961;
-            background: rgba(255, 255, 255, 0.08);
-        }
+    .hero-rule-diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
 
-        .notify-button {
-            padding: clamp(0.875rem, 3vw, 1rem) clamp(2rem, 5vw, 2.5rem);
-            background: linear-gradient(135deg, #c9a961 0%, #d4af7a 100%);
-            border: none;
-            border-radius: 50px;
-            color: #1a1410;
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            -webkit-appearance: none;
-            appearance: none;
-            touch-action: manipulation;
-            min-height: 44px;
-            white-space: nowrap;
-        }
+    .hero-tagline {
+      font-size: clamp(14px, 1.5vw, 18px);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      color: var(--cream-dim);
+      line-height: 1.75;
+      margin-bottom: 60px;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) 0.75s forwards;
+    }
 
-        .notify-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(201, 169, 97, 0.3);
-            background: linear-gradient(135deg, #d4af7a 0%, #c9a961 100%);
-        }
+    .hero-split {
+      display: inline-flex;
+      align-items: center;
+      gap: 36px;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) 0.95s forwards;
+    }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: clamp(1.25rem, 4vw, 1.5rem);
-            margin-top: clamp(2rem, 5vw, 3rem);
-        }
+    .hero-split-item { text-align: center; }
 
-        .social-link {
-            color: #d4af7a;
-            font-size: clamp(1.25rem, 4vw, 1.5rem);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            padding: 0.5rem;
-            min-width: 44px;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .hero-split-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
 
-        .social-link:hover {
-            color: #f5f1e8;
-            transform: translateY(-3px);
-        }
+    .hero-split-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+    }
 
-        .footer-text {
-            margin-top: clamp(2rem, 5vw, 3rem);
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
-            color: rgba(212, 175, 122, 0.5);
-            letter-spacing: 0.05em;
-            line-height: 1.5;
-        }
+    .hero-split-sep {
+      width: 1px;
+      height: 52px;
+      background: var(--rule);
+    }
 
-        @media (max-width: 768px) {
-            body::before {
-                animation: rotate 60s linear infinite;
-            }
+    .hero-scroll {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-expo) 1.3s forwards;
+    }
 
-            .offerings {
-                flex-direction: column;
-                align-items: center;
-            }
+    .hero-scroll-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-            .offering {
-                width: 100%;
-                max-width: 350px;
-            }
+    .hero-scroll-bar {
+      width: 1px;
+      height: 52px;
+      background: linear-gradient(to bottom, var(--gold-lo), transparent);
+      animation: scrollPulse 2.4s ease-in-out 2s infinite;
+    }
 
-            .offering:active {
-                transform: scale(0.98);
-            }
+    /* ── CONCEPT ──────────────────────────── */
+    .concept {
+      padding: 140px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 40%, var(--bg-warm) 60%, var(--bg) 100%);
+    }
 
-            .notify-form {
-                flex-direction: column;
-                align-items: stretch;
-            }
+    .concept-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 88px;
+      align-items: center;
+    }
 
-            .notify-input {
-                width: 100%;
-            }
+    .concept-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
 
-            .notify-button {
-                width: 100%;
-            }
+    .concept-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 3.8vw, 54px);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--cream);
+      margin-bottom: 32px;
+    }
 
-            .notify-button:active {
-                transform: scale(0.98);
-            }
-        }
+    .concept-heading em {
+      font-style: italic;
+      color: var(--gold-hi);
+    }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
+    .concept-body {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--cream-dim);
+    }
 
-            .divider::before,
-            .divider::after {
-                left: -15px;
-                right: -15px;
-            }
+    .concept-cards {
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
 
-            .divider::after {
-                right: -15px;
-            }
-        }
+    .concept-card {
+      padding: 48px 44px;
+      position: relative;
+      transition: background 0.4s ease;
+    }
 
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
+    .concept-card:first-child {
+      background: linear-gradient(140deg, rgba(50,28,10,0.5) 0%, transparent 70%);
+      border-bottom: 1px solid var(--rule);
+    }
 
-        @supports (-webkit-touch-callout: none) {
-            body {
-                min-height: -webkit-fill-available;
-            }
-        }
-    </style>
+    .concept-card:last-child {
+      background: linear-gradient(320deg, rgba(10,12,26,0.5) 0%, transparent 70%);
+    }
+
+    .concept-card:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .concept-card-glyph {
+      position: absolute;
+      top: 36px;
+      right: 40px;
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--rule);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .concept-card-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .concept-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+
+    .concept-card-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream-dim);
+      line-height: 1.65;
+      max-width: 320px;
+    }
+
+    /* ── OFFERINGS ────────────────────────── */
+    .offerings {
+      padding: 140px 0;
+    }
+
+    .offerings-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 72px;
+    }
+
+    .offerings-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .offerings-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3.6vw, 52px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--cream);
+      max-width: 460px;
+    }
+
+    .offerings-ghost-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(60px, 8vw, 108px);
+      font-weight: 700;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--rule);
+      user-select: none;
+    }
+
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+    }
+
+    .offering-card {
+      background: var(--surface);
+      padding: 56px 40px 52px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s ease;
+    }
+
+    .offering-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(200,149,44,0.07) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .offering-card:hover { background: var(--surface-2); }
+    .offering-card:hover::before { opacity: 1; }
+
+    .offering-num {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      margin-bottom: 44px;
+    }
+
+    .offering-icon-ring {
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--rule);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      font-size: 22px;
+      transition: border-color 0.3s ease;
+    }
+
+    .offering-card:hover .offering-icon-ring {
+      border-color: rgba(200,149,44,0.45);
+    }
+
+    .offering-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .offering-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream-dim);
+      line-height: 1.72;
+    }
+
+    /* Animated bottom line on hover */
+    .offering-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 40px;
+      right: 40px;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--ease-expo);
+    }
+
+    .offering-card:hover::after { transform: scaleX(1); }
+
+    /* ── CTA ──────────────────────────────── */
+    .cta {
+      padding: 160px 0;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+      border-top: 1px solid var(--rule);
+    }
+
+    .cta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,149,44,0.3);
+      padding: 9px 22px;
+      border-radius: 100px;
+      margin-bottom: 52px;
+    }
+
+    .cta-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    .cta-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 6vw, 76px);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--cream);
+      margin: 0 auto 28px;
+      max-width: 680px;
+    }
+
+    .cta-heading em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hi) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--cream-dim);
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    .form-wrap {
+      display: flex;
+      align-items: stretch;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .form-input {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,149,44,0.22);
+      border-right: none;
+      border-radius: 2px 0 0 2px;
+      padding: 16px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-input::placeholder { color: var(--muted); }
+
+    .form-input:focus {
+      border-color: rgba(200,149,44,0.55);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .form-btn {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      border-radius: 0 2px 2px 0;
+      padding: 16px 30px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      touch-action: manipulation;
+      min-height: 52px;
+      transition: background 0.25s ease, transform 0.12s ease;
+    }
+
+    .form-btn:hover { background: var(--gold-hi); }
+    .form-btn:active { transform: scale(0.98); }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 18px;
+    }
+
+    /* ── FOOTER ───────────────────────────── */
+    footer {
+      padding: 52px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.35; transform: scaleY(1); }
+      50%       { opacity: 1;    transform: scaleY(1.18); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1;   transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s var(--ease-expo), transform 0.85s var(--ease-expo);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* ── RESPONSIVE ───────────────────────── */
+    @media (max-width: 960px) {
+      #nav, #nav.scrolled { padding-left: 28px; padding-right: 28px; }
+      .container { padding: 0 28px; }
+
+      .concept-inner {
+        grid-template-columns: 1fr;
+        gap: 52px;
+      }
+
+      .offerings-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .offerings-ghost-num { font-size: 56px; }
+
+      .offerings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 28px;
+        text-align: center;
+      }
+
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+
+      .hero-ghost span { -webkit-text-stroke-width: 0.5px; }
+
+      .concept-cards { display: none; }
+
+      .form-wrap {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .form-input {
+        border-right: 1px solid rgba(200,149,44,0.22);
+        border-radius: 2px;
+      }
+
+      .form-btn {
+        border-radius: 2px;
+        padding: 16px;
+        width: 100%;
+      }
+
+      .offering-card { padding: 44px 28px 40px; }
+      .offering-card::after { left: 28px; right: 28px; }
+
+      .concept { padding: 100px 0; }
+      .offerings { padding: 100px 0; }
+      .cta { padding: 120px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="logo">MERIDIEM</h1>
-        <p class="tagline">drink meridiem</p>
 
-        <div class="divider"></div>
+  <!-- ── NAV ─────────────────────────────────── -->
+  <nav id="nav" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Meridiem — home">Meridiem</a>
+    <ul class="nav-links">
+      <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a></li>
+      <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a></li>
+      <li><a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a></li>
+    </ul>
+  </nav>
 
-        <p class="description">
-            A new coffee shop & bar experience is brewing.<br>
-            Where morning meets night, coffee meets cocktails.
-        </p>
+  <!-- ── HERO ─────────────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid" aria-hidden="true"></div>
 
-        <div class="offerings">
-            <div class="offering">
-                <div class="offering-icon">☕</div>
-                <h3 class="offering-title">Coffee Shop</h3>
-                <p class="offering-text">Artisanal brews from dawn to dusk</p>
-            </div>
-            <div class="offering">
-                <div class="offering-icon">🍸</div>
-                <h3 class="offering-title">Bar</h3>
-                <p class="offering-text">Crafted cocktails from dusk to dawn</p>
-            </div>
-            <div class="offering">
-                <div class="offering-icon">🥫</div>
-                <h3 class="offering-title">Canned Drinks</h3>
-                <p class="offering-text">Coffee & cocktails to go</p>
-            </div>
-        </div>
-
-        <div class="coming-soon">Opening Soon</div>
-
-        <form class="notify-form" onsubmit="return handleSubmit(event)">
-            <input
-                type="email"
-                class="notify-input"
-                placeholder="Enter your email"
-                required
-                aria-label="Email address"
-            >
-            <button type="submit" class="notify-button">Notify Me</button>
-        </form>
-
-        <div class="social-links">
-            <a href="#" class="social-link" aria-label="Instagram">📷</a>
-            <a href="#" class="social-link" aria-label="Facebook">📘</a>
-            <a href="#" class="social-link" aria-label="Twitter">🐦</a>
-        </div>
-
-        <p class="footer-text">© 2026 Meridiem. All rights reserved.</p>
+    <div class="hero-ghost" aria-hidden="true">
+      <span>AM</span>
+      <span>PM</span>
     </div>
 
-    <script>
-        function handleSubmit(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input').value;
-            alert('Thank you! We\'ll notify you at ' + email + ' when we launch.');
-            event.target.reset();
-            return false;
-        }
-    </script>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Coffee Shop &amp; Bar &nbsp;·&nbsp; Opening 2026</p>
+
+      <h1 class="hero-title" id="hero-title">Meridiem</h1>
+
+      <div class="hero-rule" aria-hidden="true">
+        <div class="hero-rule-line"></div>
+        <div class="hero-rule-diamond"></div>
+        <div class="hero-rule-line"></div>
+      </div>
+
+      <p class="hero-tagline">
+        Where morning meets night,<br />coffee meets cocktails.
+      </p>
+
+      <div class="hero-split" role="presentation">
+        <div class="hero-split-item">
+          <div class="hero-split-label">Dawn to Dusk</div>
+          <div class="hero-split-value">Coffee</div>
+        </div>
+        <div class="hero-split-sep" aria-hidden="true"></div>
+        <div class="hero-split-item">
+          <div class="hero-split-label">Dusk to Dawn</div>
+          <div class="hero-split-value">Cocktails</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span class="hero-scroll-label">Scroll</span>
+      <div class="hero-scroll-bar"></div>
+    </div>
+  </section>
+
+  <!-- ── CONCEPT ───────────────────────────────── -->
+  <section class="concept" aria-labelledby="concept-heading">
+    <div class="container">
+      <div class="concept-inner">
+
+        <div>
+          <p class="concept-eyebrow reveal">The Concept</p>
+          <h2 class="concept-heading reveal delay-1" id="concept-heading">
+            Every hour<br />has its <em>ritual.</em>
+          </h2>
+          <p class="concept-body reveal delay-2">
+            Meridiem — from the Latin for midday — is a gathering place built around the rhythm
+            of a full day. Morning light calls for a thoughtfully sourced espresso. Evening calls
+            for a perfectly balanced cocktail. And the hours in between deserve a space worthy
+            of them all.
+          </p>
+        </div>
+
+        <div class="concept-cards reveal delay-2" aria-label="What we serve, by time of day">
+          <div class="concept-card">
+            <div class="concept-card-glyph" aria-hidden="true">AM</div>
+            <div class="concept-card-label">Morning &amp; Day</div>
+            <div class="concept-card-title">The Coffee Shop</div>
+            <p class="concept-card-desc">Artisanal brews, single-origin beans, and light bites. Your perfect start.</p>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-glyph" aria-hidden="true">PM</div>
+            <div class="concept-card-label">Evening &amp; Night</div>
+            <div class="concept-card-title">The Bar</div>
+            <p class="concept-card-desc">Crafted cocktails, curated spirits, and small plates. Your perfect end.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OFFERINGS ─────────────────────────────── -->
+  <section class="offerings" aria-labelledby="offerings-heading">
+    <div class="container">
+      <div class="offerings-header">
+        <div>
+          <p class="offerings-eyebrow reveal">What We're Building</p>
+          <h2 class="offerings-heading reveal delay-1" id="offerings-heading">
+            Three ways to<br />experience Meridiem
+          </h2>
+        </div>
+        <div class="offerings-ghost-num reveal" aria-hidden="true">03</div>
+      </div>
+
+      <div class="offerings-grid">
+        <article class="offering-card reveal" aria-labelledby="offer-1-title">
+          <div class="offering-num">01</div>
+          <div class="offering-icon-ring" aria-hidden="true">☕</div>
+          <h3 class="offering-title" id="offer-1-title">Coffee Shop</h3>
+          <p class="offering-desc">
+            Artisanal brews from dawn to dusk. Single-origin beans, expert baristas, and a
+            space designed for mornings worth savoring.
+          </p>
+        </article>
+
+        <article class="offering-card reveal delay-1" aria-labelledby="offer-2-title">
+          <div class="offering-num">02</div>
+          <div class="offering-icon-ring" aria-hidden="true">🍸</div>
+          <h3 class="offering-title" id="offer-2-title">The Bar</h3>
+          <p class="offering-desc">
+            Crafted cocktails from dusk to dawn. Seasonal menus, rare spirits, and an atmosphere
+            that turns every evening into an occasion.
+          </p>
+        </article>
+
+        <article class="offering-card reveal delay-2" aria-labelledby="offer-3-title">
+          <div class="offering-num">03</div>
+          <div class="offering-icon-ring" aria-hidden="true">🥫</div>
+          <h3 class="offering-title" id="offer-3-title">Canned Drinks</h3>
+          <p class="offering-desc">
+            Our signature coffee and cocktails in ready-to-enjoy cans. Meridiem, wherever
+            your day takes you.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────── -->
+  <section class="cta" aria-labelledby="cta-heading">
+    <div class="container">
+      <div class="cta-badge reveal" aria-live="polite">
+        <span class="cta-badge-dot" aria-hidden="true"></span>
+        Opening Soon
+      </div>
+
+      <h2 class="cta-heading reveal delay-1" id="cta-heading">
+        Be first<br />through the <em>door.</em>
+      </h2>
+
+      <p class="cta-sub reveal delay-2">Drop your email. We'll reach out when we open.</p>
+
+      <form class="form-wrap reveal delay-3" id="notify-form" aria-label="Email notification signup">
+        <label for="email-input" class="sr-only">Email address</label>
+        <input
+          id="email-input"
+          class="form-input"
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          autocomplete="email"
+          aria-required="true"
+        />
+        <button class="form-btn" type="submit">Notify Me</button>
+      </form>
+
+      <p class="form-note reveal delay-4">No spam. Just the good stuff.</p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo" aria-label="Meridiem">Meridiem</div>
+
+        <ul class="footer-links" aria-label="Social links">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+        </ul>
+
+        <p class="footer-copy">© 2026 Meridiem. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Scroll-triggered reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+      revealEls.forEach(el => observer.observe(el));
+    } else {
+      // Fallback: show everything
+      revealEls.forEach(el => el.classList.add('in'));
+    }
+
+    // Email form
+    const form = document.getElementById('notify-form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const emailVal = form['email-input'].value;
+      if (!emailVal) return;
+      const btn = form.querySelector('.form-btn');
+      btn.textContent = '✓ You\'re on the list';
+      btn.style.background = '#3d6b4a';
+      btn.style.color = '#f0e6d4';
+      form['email-input'].disabled = true;
+      btn.disabled = true;
+    });
+  </script>
 </body>
 </html>
